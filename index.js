@@ -4,7 +4,7 @@ function setup() {
     canvas.parent("sketch-holder");
     canvas.style('display', 'block');
 
-    atom = new Atom(0, 0, 20, 0.75, 3, false);
+    atom = new Atom(0, 0, 20, 0.75, 3);
     counterX = Math.random(100);
     counterY = Math.random(100);
     counterZ = Math.random(100);

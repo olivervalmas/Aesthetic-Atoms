@@ -4,17 +4,16 @@ class Atom {
 
   /**
    * Create an atom.
-   * @param {number} posx - The x position of the nucleus of the atom.
-   * @param {number} posy - The y position of the nucleus of the atom.
+   * @param {number} posX - The x position of the nucleus of the atom.
+   * @param {number} posY - The y position of the nucleus of the atom.
    * @param {number} nucleusRadius - The radius of the nucleus, in pixels.
    * @param {number} rotsPerSec - A constant that determines how fast the electrons move around their orbits.
    * @param {number} electronCount - The number of electrons in the atom.
-   * @param {boolean} noise - Enables or disables noise inside the nucleus.
     */
 
-  constructor(posx, posy, nucleusRadius, rotsPerSec, electronCount, noise) {
-    this._posx = posx;
-    this._posy = posy;
+  constructor(posX, posY, nucleusRadius, rotsPerSec, electronCount) {
+    this._posX = posX;
+    this._posY = posY;
     this._nucleusRadius = nucleusRadius;
     this._radius = nucleusRadius * 8;
     this._electronCount = electronCount;
@@ -23,7 +22,7 @@ class Atom {
     this._rotation = 0;
     this.generateRandoms(20);
     this._tailSpheres = 10;
-    this._noise = noise;
+    this._noise = false;
     this._nucleusVibrate = false;
     this._electronVibrate = false;
     this._spinX = false;
@@ -33,9 +32,6 @@ class Atom {
     this._names = ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon', 'Nitrogen', 'Oxygen', 'Fluorine', 'Neon'];
     this._nucleusColor = color(3, 28, 193);
     this._electronColor = color(193, 3, 3);
-    this._counterX = Math.random(100);
-    this._counterY = Math.random(100);
-    this._counterZ = Math.random(100);
   }
 
   /**
@@ -230,9 +226,9 @@ class Atom {
 
     push();
     if (this._nucleusVibrate) {
-      translate(this._posx + random(-2, 2), this._posy + random(-2, 2));
+      translate(this._posX + random(-2, 2), this._posY + random(-2, 2));
     } else {
-      translate(this._posx, this._posy);
+      translate(this._posX, this._posY);
     }
 
     //Draws a sphere to the canvas in the specified color.
@@ -248,7 +244,7 @@ class Atom {
         rand.mult(this._nucleusRadius);
         //Lines are drawn in white with an alpha value (transparency) of 30.
         stroke(255, 255, 255, 30);
-        line(this.posx, this.posy, 0, rand.x, rand.y, rand.z);
+        line(this.posX, this.posY, 0, rand.x, rand.y, rand.z);
         noStroke();
       }
     }
