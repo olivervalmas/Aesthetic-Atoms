@@ -5,9 +5,6 @@ function setup() {
     canvas.style('display', 'block');
 
     atom = new Atom(0, 0, 20, 0.75, 3);
-    counterX = Math.random(100);
-    counterY = Math.random(100);
-    counterZ = Math.random(100);
 }
 
 function draw() {
@@ -15,21 +12,10 @@ function draw() {
     orbitControl();
     clear();
 
-    if (atom.spinX) {
-        counterX += 0.1;
-    }
+    rotateX(atom.counterX*PI/16);
+    rotateY(atom.counterY*PI/16);
+    rotateZ(atom.counterZ*PI/16);
 
-    if (atom.spinY) {
-        counterY += 0.1;
-    }
-
-    if (atom.spinZ) {
-        counterZ += 0.1;
-    }
-
-    rotateX(counterX*PI/16);
-    rotateY(counterY*PI/16);
-    rotateZ(counterZ*PI/16);
     atom.draw();
 
     if (document.getElementById("smoothing").checked) {

@@ -9,9 +9,10 @@ class Atom {
    * @param {number} nucleusRadius - The radius of the nucleus, in pixels.
    * @param {number} rotsPerSec - A constant that determines how fast the electrons move around their orbits.
    * @param {number} electronCount - The number of electrons in the atom.
+   * @param {number} tailSpheres - The number of spheres that makes up each electron.
     */
 
-  constructor(posX, posY, nucleusRadius, rotsPerSec, electronCount) {
+  constructor(posX=0, posY=0, nucleusRadius=15, rotsPerSec=1, electronCount=3, tailSpheres=15) {
     this._posX = posX;
     this._posY = posY;
     this._nucleusRadius = nucleusRadius;
@@ -21,7 +22,7 @@ class Atom {
     this._rotsPerSec = rotsPerSec;
     this._rotation = 0;
     this.generateRandoms(20);
-    this._tailSpheres = 10;
+    this._tailSpheres = tailSpheres;
     this._noise = false;
     this._nucleusVibrate = false;
     this._electronVibrate = false;
@@ -32,6 +33,12 @@ class Atom {
     this._names = ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon', 'Nitrogen', 'Oxygen', 'Fluorine', 'Neon'];
     this._nucleusColor = color(3, 28, 193);
     this._electronColor = color(193, 3, 3);
+    //Keeps track of spinning in x-axis
+    this._counterX = Math.random(100);
+    //Keeps track of spinning in y-axis
+    this._counterY = Math.random(100);
+    //Keeps track of spinning in z-axis
+    this._counterZ = Math.random(100);
   }
 
   /**
@@ -43,6 +50,11 @@ class Atom {
     return this._names[this._electronCount - 1];
   }
 
+  /**
+   * Gets the color of the nucleus.
+   * @returns {p5.Color}
+   */
+
   get nucleusColor() {
     return this._nucleusColor;
   }
@@ -50,11 +62,17 @@ class Atom {
   /**
    * Sets the color of the nucleus.
    * @param {p5.Color} newColor
+   * @returns {undefined} nothing
    */
 
   set nucleusColor(newColor) {
     this._nucleusColor = newColor;
   }
+
+  /**
+   * Gets the color of the electrons.
+   * @returns {p5.Color}
+   */
 
   get electronColor() {
     return this._electronColor;
@@ -63,11 +81,17 @@ class Atom {
   /**
    * Sets the color of the electrons.
    * @param {p5.Color} newColor
+   * @returns {undefined} nothing
    */
 
   set electronColor(newColor) {
     this._electronColor = newColor;
   }
+
+  /**
+   * Gets the radius (in pixels) of the nucleus.
+   * @returns {number}
+   */
 
   get nucleusRadius() {
     return this._nucleusRadius;
@@ -76,6 +100,7 @@ class Atom {
   /**
    * Sets the radius (in pixels) of the nucleus.
    * @param {number} newRadius
+   * @returns {undefined} nothing
    */
 
   set nucleusRadius(newRadius) {
@@ -85,6 +110,11 @@ class Atom {
     this._radius = newRadius * 8;
   }
 
+  /**
+   * Gets the current number of electrons in the atom.
+   * @returns {number}
+   */
+
   get electronCount() {
     return this._electronCount;
   }
@@ -92,12 +122,18 @@ class Atom {
   /**
    * Sets the current number of electrons in the atom.
    * @param {number} newElectronCount
+   * @returns {undefined} nothing
    */
 
   set electronCount(newElectronCount) {
     this._electronCount = newElectronCount;
     this._deltaAngle = PI / this.electronCount;
   }
+
+  /**
+   * Gets the orbital speed of the the electrons.
+   * @returns {number}
+   */
 
   get electronSpeed() {
     return this._rotsPerSec;
@@ -106,11 +142,17 @@ class Atom {
   /**
    * Sets the orbital speed of the electrons.
    * @param {number} newSpeed
+   * @returns {undefined} nothing
    */
 
   set electronSpeed(newSpeed) {
     this._rotsPerSec = newSpeed;
   }
+
+  /**
+   * Gets whether spinning about the x-axis is enabled or disabled.
+   * @returns {boolean}
+   */
 
   get spinX() {
     return this._spinX;
@@ -119,11 +161,17 @@ class Atom {
   /**
    * Sets whether spinning about the x-axis is enabled or disabled.
    * @param {boolean} newSpinX
+   * @returns {undefined} nothing
    */
 
   set spinX(newSpinX) {
     this._spinX = newSpinX;
   }
+
+  /**
+   * Gets whether spinning about the y-axis is enabled or disabled.
+   * @returns {boolean}
+   */
 
   get spinY() {
     return this._spinY;
@@ -132,11 +180,17 @@ class Atom {
   /**
    * Sets whether spinning about the y-axis is enabled or disabled.
    * @param {boolean} newSpinY
+   * @returns {undefined} nothing
    */
 
   set spinY(newSpinY) {
     this._spinY = newSpinY;
   }
+
+  /**
+   * Gets whether spinning about the z-axis is enabled or disabled.
+   * @returns {boolean}
+   */
 
   get spinZ() {
     return this._spinZ;
@@ -145,11 +199,17 @@ class Atom {
   /**
    * Sets whether spinning about the z-axis is enabled or disabled.
    * @param {boolean} newSpinZ
+   * @returns {undefined} nothing
    */
 
   set spinZ(newSpinZ) {
     this._spinZ = newSpinZ;
   }
+
+  /**
+   * Gets whether the nucleus is vibrating.
+   * @returns {boolean}
+   */
 
   get nucleusVibrate() {
     return this._nucleusVibrate;
@@ -158,24 +218,36 @@ class Atom {
   /**
    * Sets whether the nucleus is vibrating.
    * @param {boolean} newVal
+   * @returns {undefined} nothing
    */
 
   set nucleusVibrate(newVal) {
     this._nucleusVibrate = newVal;
   }
 
+  /**
+   * Gets whether the electrons are vibrating.
+   * @returns {boolean}
+   */
+
   get electronVibrate() {
     return this._electronVibrate;
   }
 
   /**
-   * Sets whether the electrons vibrate.
+   * Sets whether the electrons are vibrating.
    * @param {boolean} newVal
+   * @returns {undefined} nothing
    */
 
   set electronVibrate(newVal) {
     this._electronVibrate = newVal;
   }
+
+  /**
+   * Gets whether the nucleus has noise.
+   * @returns {boolean}
+   */
 
   get noise() {
     return this._noise;
@@ -184,10 +256,38 @@ class Atom {
   /**
    * Sets whether the nucleus has noise.
    * @param {boolean} newVal
+   * @returns {undefined} nothing
    */
 
   set noise(newVal) {
     this._noise = newVal;
+  }
+
+  /**
+   * Gets the counterX value.
+   * @returns {number} _counterX
+   */
+
+  get counterX() {
+    return this._counterX;
+  }
+
+  /**
+   * Gets the counterY value.
+   * @returns {number} _counterY
+   */
+
+  get counterY() {
+    return this._counterY;
+  }
+
+  /**
+   * Gets the counterZ value.
+   * @returns {number} _counterZ
+   */
+
+  get counterZ() {
+    return this._counterZ;
   }
 
   /**
@@ -312,6 +412,19 @@ class Atom {
    */
 
   draw() {
+
+    //If spinning in x-axis is enabled then increment counterX
+    if (atom.spinX) {
+      this._counterX += 0.1;
+    }
+
+    if (atom.spinY) {
+      this._counterY += 0.1;
+    }
+
+    if (atom.spinZ) {
+      this._counterZ += 0.1;
+    }
 
     let deltaTime = this.calcDeltaTime();
     /*
