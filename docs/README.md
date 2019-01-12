@@ -12,33 +12,45 @@
     -   [electronColor][8]
         -   [Parameters][9]
     -   [nucleusRadius][10]
-        -   [Parameters][11]
-    -   [electronCount][12]
-        -   [Parameters][13]
-    -   [electronSpeed][14]
+    -   [nucleusRadius][11]
+        -   [Parameters][12]
+    -   [electronCount][13]
+    -   [electronCount][14]
         -   [Parameters][15]
-    -   [spinX][16]
-        -   [Parameters][17]
-    -   [spinY][18]
-        -   [Parameters][19]
-    -   [spinZ][20]
+    -   [electronSpeed][16]
+    -   [electronSpeed][17]
+        -   [Parameters][18]
+    -   [spinX][19]
+    -   [spinX][20]
         -   [Parameters][21]
-    -   [nucleusVibrate][22]
-        -   [Parameters][23]
-    -   [electronVibrate][24]
-        -   [Parameters][25]
-    -   [noise][26]
+    -   [spinY][22]
+    -   [spinY][23]
+        -   [Parameters][24]
+    -   [spinZ][25]
+    -   [spinZ][26]
         -   [Parameters][27]
-    -   [generateRandoms][28]
-        -   [Parameters][29]
-    -   [calcDeltaTime][30]
-    -   [drawNucleus][31]
-    -   [drawElectrons][32]
-    -   [drawElectron][33]
-        -   [Parameters][34]
-    -   [drawOrbits][35]
+    -   [nucleusVibrate][28]
+    -   [nucleusVibrate][29]
+        -   [Parameters][30]
+    -   [electronVibrate][31]
+    -   [electronVibrate][32]
+        -   [Parameters][33]
+    -   [noise][34]
+    -   [noise][35]
         -   [Parameters][36]
-    -   [draw][37]
+    -   [counterX][37]
+    -   [counterY][38]
+    -   [counterZ][39]
+    -   [generateRandoms][40]
+        -   [Parameters][41]
+    -   [calcDeltaTime][42]
+    -   [drawNucleus][43]
+    -   [drawElectrons][44]
+    -   [drawElectron][45]
+        -   [Parameters][46]
+    -   [drawOrbits][47]
+        -   [Parameters][48]
+    -   [draw][49]
 
 ## Atom
 
@@ -46,18 +58,18 @@ Class representing an atom.
 
 ### Parameters
 
--   `posX` **[number][38]** The x position of the nucleus of the atom. (optional, default `0`)
--   `posY` **[number][38]** The y position of the nucleus of the atom. (optional, default `0`)
--   `nucleusRadius` **[number][38]** The radius of the nucleus, in pixels. (optional, default `15`)
--   `rotsPerSec` **[number][38]** A constant that determines how fast the electrons move around their orbits. (optional, default `1`)
--   `electronCount` **[number][38]** The number of electrons in the atom. (optional, default `3`)
--   `tailSpheres` **[number][38]** The number of spheres that makes up each electron. (optional, default `15`)
+-   `posX` **[number][50]** The x position of the nucleus of the atom. (optional, default `0`)
+-   `posY` **[number][50]** The y position of the nucleus of the atom. (optional, default `0`)
+-   `nucleusRadius` **[number][50]** The radius of the nucleus, in pixels. (optional, default `15`)
+-   `rotsPerSec` **[number][50]** A constant that determines how fast the electrons move around their orbits. (optional, default `1`)
+-   `electronCount` **[number][50]** The number of electrons in the atom. (optional, default `3`)
+-   `tailSpheres` **[number][50]** The number of spheres that makes up each electron. (optional, default `15`)
 
 ### name
 
 Gets the name of the atom (according to the periodic table).
 
-Returns **[string][39]** 
+Returns **[string][51]** 
 
 ### nucleusColor
 
@@ -73,7 +85,7 @@ Sets the color of the nucleus.
 
 -   `newColor` **p5.Color** 
 
-Returns **[undefined][40]** nothing
+Returns **[undefined][52]** nothing
 
 ### electronColor
 
@@ -89,7 +101,13 @@ Sets the color of the electrons.
 
 -   `newColor` **p5.Color** 
 
-Returns **[undefined][40]** nothing
+Returns **[undefined][52]** nothing
+
+### nucleusRadius
+
+Gets the radius (in pixels) of the nucleus.
+
+Returns **[number][50]** 
 
 ### nucleusRadius
 
@@ -97,7 +115,15 @@ Sets the radius (in pixels) of the nucleus.
 
 #### Parameters
 
--   `newRadius` **[number][38]** 
+-   `newRadius` **[number][50]** 
+
+Returns **[undefined][52]** nothing
+
+### electronCount
+
+Gets the current number of electrons in the atom.
+
+Returns **[number][50]** 
 
 ### electronCount
 
@@ -105,7 +131,15 @@ Sets the current number of electrons in the atom.
 
 #### Parameters
 
--   `newElectronCount` **[number][38]** 
+-   `newElectronCount` **[number][50]** 
+
+Returns **[undefined][52]** nothing
+
+### electronSpeed
+
+Gets the orbital speed of the the electrons.
+
+Returns **[number][50]** 
 
 ### electronSpeed
 
@@ -113,7 +147,15 @@ Sets the orbital speed of the electrons.
 
 #### Parameters
 
--   `newSpeed` **[number][38]** 
+-   `newSpeed` **[number][50]** 
+
+Returns **[undefined][52]** nothing
+
+### spinX
+
+Gets whether spinning about the x-axis is enabled or disabled.
+
+Returns **[boolean][53]** 
 
 ### spinX
 
@@ -121,7 +163,15 @@ Sets whether spinning about the x-axis is enabled or disabled.
 
 #### Parameters
 
--   `newSpinX` **[boolean][41]** 
+-   `newSpinX` **[boolean][53]** 
+
+Returns **[undefined][52]** nothing
+
+### spinY
+
+Gets whether spinning about the y-axis is enabled or disabled.
+
+Returns **[boolean][53]** 
 
 ### spinY
 
@@ -129,7 +179,15 @@ Sets whether spinning about the y-axis is enabled or disabled.
 
 #### Parameters
 
--   `newSpinY` **[boolean][41]** 
+-   `newSpinY` **[boolean][53]** 
+
+Returns **[undefined][52]** nothing
+
+### spinZ
+
+Gets whether spinning about the z-axis is enabled or disabled.
+
+Returns **[boolean][53]** 
 
 ### spinZ
 
@@ -137,7 +195,15 @@ Sets whether spinning about the z-axis is enabled or disabled.
 
 #### Parameters
 
--   `newSpinZ` **[boolean][41]** 
+-   `newSpinZ` **[boolean][53]** 
+
+Returns **[undefined][52]** nothing
+
+### nucleusVibrate
+
+Gets whether the nucleus is vibrating.
+
+Returns **[boolean][53]** 
 
 ### nucleusVibrate
 
@@ -145,15 +211,31 @@ Sets whether the nucleus is vibrating.
 
 #### Parameters
 
--   `newVal` **[boolean][41]** 
+-   `newVal` **[boolean][53]** 
+
+Returns **[undefined][52]** nothing
 
 ### electronVibrate
 
-Sets whether the electrons vibrate.
+Gets whether the electrons are vibrating.
+
+Returns **[boolean][53]** 
+
+### electronVibrate
+
+Sets whether the electrons are vibrating.
 
 #### Parameters
 
--   `newVal` **[boolean][41]** 
+-   `newVal` **[boolean][53]** 
+
+Returns **[undefined][52]** nothing
+
+### noise
+
+Gets whether the nucleus has noise.
+
+Returns **[boolean][53]** 
 
 ### noise
 
@@ -161,7 +243,27 @@ Sets whether the nucleus has noise.
 
 #### Parameters
 
--   `newVal` **[boolean][41]** 
+-   `newVal` **[boolean][53]** 
+
+Returns **[undefined][52]** nothing
+
+### counterX
+
+Gets the counterX value.
+
+Returns **[number][50]** \_counterX
+
+### counterY
+
+Gets the counterY value.
+
+Returns **[number][50]** \_counterY
+
+### counterZ
+
+Gets the counterZ value.
+
+Returns **[number][50]** \_counterZ
 
 ### generateRandoms
 
@@ -170,13 +272,13 @@ These random rotations determine the starting location of each atom meaning that
 
 #### Parameters
 
--   `numberOfRandoms` **[number][38]** 
+-   `numberOfRandoms` **[number][50]** 
 
 ### calcDeltaTime
 
 Calculates the time passed between each call of draw().
 
-Returns **[number][38]** 
+Returns **[number][50]** 
 
 ### drawNucleus
 
@@ -192,7 +294,7 @@ Draws a specific electron and tail. Its position relative to other electrons is 
 
 #### Parameters
 
--   `index` **[number][38]** 
+-   `index` **[number][50]** 
 
 ### drawOrbits
 
@@ -200,7 +302,7 @@ Draws the orbit for each electron onto the canvas.
 
 #### Parameters
 
--   `thickness` **[number][38]** The thickness of the orbit.
+-   `thickness` **[number][50]** The thickness of the orbit.
 
 ### draw
 
@@ -226,64 +328,88 @@ Draws the nucleus, electrons and orbits to the canvas.
 
 [10]: #nucleusradius
 
-[11]: #parameters-3
+[11]: #nucleusradius-1
 
-[12]: #electroncount
+[12]: #parameters-3
 
-[13]: #parameters-4
+[13]: #electroncount
 
-[14]: #electronspeed
+[14]: #electroncount-1
 
-[15]: #parameters-5
+[15]: #parameters-4
 
-[16]: #spinx
+[16]: #electronspeed
 
-[17]: #parameters-6
+[17]: #electronspeed-1
 
-[18]: #spiny
+[18]: #parameters-5
 
-[19]: #parameters-7
+[19]: #spinx
 
-[20]: #spinz
+[20]: #spinx-1
 
-[21]: #parameters-8
+[21]: #parameters-6
 
-[22]: #nucleusvibrate
+[22]: #spiny
 
-[23]: #parameters-9
+[23]: #spiny-1
 
-[24]: #electronvibrate
+[24]: #parameters-7
 
-[25]: #parameters-10
+[25]: #spinz
 
-[26]: #noise
+[26]: #spinz-1
 
-[27]: #parameters-11
+[27]: #parameters-8
 
-[28]: #generaterandoms
+[28]: #nucleusvibrate
 
-[29]: #parameters-12
+[29]: #nucleusvibrate-1
 
-[30]: #calcdeltatime
+[30]: #parameters-9
 
-[31]: #drawnucleus
+[31]: #electronvibrate
 
-[32]: #drawelectrons
+[32]: #electronvibrate-1
 
-[33]: #drawelectron
+[33]: #parameters-10
 
-[34]: #parameters-13
+[34]: #noise
 
-[35]: #draworbits
+[35]: #noise-1
 
-[36]: #parameters-14
+[36]: #parameters-11
 
-[37]: #draw
+[37]: #counterx
 
-[38]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[38]: #countery
 
-[39]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[39]: #counterz
 
-[40]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+[40]: #generaterandoms
 
-[41]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[41]: #parameters-12
+
+[42]: #calcdeltatime
+
+[43]: #drawnucleus
+
+[44]: #drawelectrons
+
+[45]: #drawelectron
+
+[46]: #parameters-13
+
+[47]: #draworbits
+
+[48]: #parameters-14
+
+[49]: #draw
+
+[50]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[51]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[52]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+
+[53]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
