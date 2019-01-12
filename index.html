@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Aesthetic Atoms</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="atom.js"></script>
+  <style>
+    h1, p {
+            text-align: center;
+        }
+    form {
+            margin: 0 auto;
+            width:400px;
+        }
+    </style>
+</head>
+
+<body>
+  <div>
+    <h1 id="title">Aesthetic Atoms</h1>
+    <p class="lead">This is a demonstration of an application of my p5.js component.</p>
+    <form id="input_form">
+      <label>Nucleus Radius</label>
+      <input id="nucleusRadius" type="number" min="5" max="1000" value="20" />
+      <label>Electron Count</label>
+      <input id="electronCount" type="number" min="1" max="10" value="3" />
+      <label>Nucleus Vibration</label>
+      <input id="nucleusVibrate" type="checkbox" />
+      <label>Electron Vibration</label>
+      <input id="electronVibrate" type="checkbox" />
+      <label>Electron Speed</label>
+      <input id="electronSpeed" type="range" min="0" max="5" value="0.75" step="0.01" /></br>
+      <label>Nucleus Color</label>
+      <input id="nucleusColor" type="color" value="#031cc1" />
+      <label>Electron Color</label>
+      <input id="electronColor" type="color" value="#c10303" /></br>
+      <label>Spin X</label>
+      <input id="spinX" type="checkbox" />
+      <label>Spin Y</label>
+      <input id="spinY" type="checkbox" />
+      <label>Spin Z</label>
+      <input id="spinZ" type="checkbox" /></br>
+      <label>Noise</label>
+      <input id="noise" type="checkbox" />
+      <label>Smoothing</label>
+      <input id="smoothing" type="checkbox" />
+    </form>
+    <div id="sketch-holder" class="center-block"></div>
+    <!--<p>Scary bug :( https://github.com/processing/p5.js/issues/3180</p>-->
+  </div>
+</body>
+
+</html>
