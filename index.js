@@ -10,11 +10,8 @@ function setup() {
 function draw() {
 
     orbitControl();
-    clear();
 
-    rotateX(atom.counterX*PI/16);
-    rotateY(atom.counterY*PI/16);
-    rotateZ(atom.counterZ*PI/16);
+    clear();
 
     atom.draw();
 
