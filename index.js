@@ -5,6 +5,7 @@ function setup() {
     canvas.style('display', 'block');
 
     atom = new Atom(0, 0, 20, 0.75, 3);
+    document.getElementById("title").innerHTML = "Aesthetic Atoms: " + atom.name;
 }
 
 function draw() {

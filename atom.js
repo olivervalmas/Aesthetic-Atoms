@@ -22,6 +22,7 @@ class Atom {
     this._deltaAngle = PI / electronCount;
     this._rotsPerSec = rotsPerSec;
     this._rotation = 0;
+    this._maximumNumberOfElectrons = 10;
     this.generateRandoms(20);
     this._tailSpheres = tailSpheres;
     this._noise = false;
@@ -50,6 +51,15 @@ class Atom {
 
   get name() {
     return this._names[this._electronCount - 1];
+  }
+
+  /**
+   * Gets the maximum number of electrons allowed.
+   * @returns {number}
+   */
+
+  get maximumNumberOfElectrons() {
+    return this._maximumNumberOfElectrons;
   }
 
   /**
@@ -359,7 +369,7 @@ class Atom {
         rand.mult(this._nucleusRadius);
         //Lines are drawn in white with an alpha value (transparency) of 30.
         stroke(255, 255, 255, 30);
-        line(this.posX, this.posY, 0, rand.x, rand.y, rand.z);
+        line(this._posX, this._posY, 0, rand.x, rand.y, rand.z);
         noStroke();
       }
     }
@@ -385,7 +395,7 @@ class Atom {
   drawElectron(index) {
     //Gets the current rotation and takes the electron's random relative rotation into account.
     let baseRot = this._rotation + this._randoms[index];
-    let deltaRot = PI / 256;
+    let deltaRot = Math.PI / 256;
     let jiggle = 0;
 
     //Loops through
