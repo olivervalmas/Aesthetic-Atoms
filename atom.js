@@ -10,9 +10,10 @@ class Atom {
    * @param {number} rotsPerSec - A constant that determines how fast the electrons move around their orbits.
    * @param {number} electronCount - The number of electrons in the atom.
    * @param {number} tailSpheres - The number of spheres that makes up each electron.
+   * @param {boolean} smoothing - Whether smoothing is enabled.
     */
 
-  constructor(posX=0, posY=0, nucleusRadius=15, rotsPerSec=1, electronCount=3, tailSpheres=15) {
+  constructor(posX=0, posY=0, nucleusRadius=15, rotsPerSec=1, electronCount=3, tailSpheres=15, smoothing=false) {
     this._posX = posX;
     this._posY = posY;
     this._nucleusRadius = nucleusRadius;
@@ -39,6 +40,7 @@ class Atom {
     this._counterY = Math.random(100);
     //Keeps track of spinning in z-axis
     this._counterZ = Math.random(100);
+    this._smoothing = smoothing;
   }
 
   /**
@@ -261,6 +263,19 @@ class Atom {
 
   set noise(newVal) {
     this._noise = newVal;
+  }
+
+  /**
+   * Gets whether smoothing is enabled.
+   * @returns {boolean}
+   */
+
+  get smoothing() {
+    return this._smoothing;
+  }
+
+  set smoothing(newVal) {
+    this._smoothing = newVal;
   }
 
   /**

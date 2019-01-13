@@ -15,9 +15,11 @@ function draw() {
 
     atom.draw();
 
-    if (document.getElementById("smoothing").checked) {
+    if (atom.smoothing) {
         console.log("smooth");
         smooth(5);
+    } else {
+        noSmooth();
     }
 }
 
@@ -105,6 +107,13 @@ document.addEventListener("DOMContentLoaded", function(){
         atom.noise = val;
     }
     n.addEventListener("change", changeNoise);
+
+    let sm = document.getElementById("smoothing");
+    function changeSmoothing(event){
+        let val = document.getElementById("smoothing").checked;
+        atom.smoothing = val;
+    }
+    sm.addEventListener("change", changeSmoothing);
 
     let cf = document.getElementById("input_form");
 
