@@ -408,23 +408,47 @@ class Atom {
   }
 
   /**
+   * Increment counterX by amount if spinX is enabled.
+   * @param {number} amount
+   */
+
+  incrementCounterX(amount) {
+    if (atom.spinX) {
+      this._counterX += amount;
+    }
+  }
+
+  /**
+   * Increment counterY by amount if spinY is enabled.
+   * @param {number} amount
+   */
+
+  incrementCounterY(amount) {
+    if (atom.spinY) {
+      this._counterY += amount;
+    }
+  }
+
+  /**
+   * Increment counterZ by amount if spinZ is enabled.
+   * @param {number} amount
+   */
+
+  incrementCounterZ(amount) {
+    if (atom.spinZ) {
+      this._counterZ += amount;
+    }
+  }
+
+  /**
    * Draws the nucleus, electrons and orbits to the canvas.
    */
 
   draw() {
 
-    //If spinning in x-axis is enabled then increment counterX
-    if (atom.spinX) {
-      this._counterX += 0.1;
-    }
-
-    if (atom.spinY) {
-      this._counterY += 0.1;
-    }
-
-    if (atom.spinZ) {
-      this._counterZ += 0.1;
-    }
+    this.incrementCounterX(0.1);
+    this.incrementCounterY(0.1);
+    this.incrementCounterZ(0.1);
 
     let deltaTime = this.calcDeltaTime();
     /*
