@@ -1,9 +1,11 @@
-/** A class that represents an atom component. */
+/** A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
+ * of the model is to be aesthetically pleasing and is therefore not scientifically accurate. */
 
 class Atom {
 
     /**
-   * Create an atom.
+   * Create an atom according to the parameters.
+     *
    * @param {number} posX - The x position of the nucleus of the atom.
    * @param {number} posY - The y position of the nucleus of the atom.
    * @param {number} nucleusRadius - The radius of the nucleus, in pixels.
@@ -26,7 +28,7 @@ class Atom {
         this._maximumNumberOfElectrons = 10;
         this.generateRandoms(this._maximumNumberOfElectrons);
         this._tailSpheres = tailSpheres;
-        this._noise = false;
+        this._nucleusNoise = false;
 
         this._nucleusVibrate = false;
         this._electronVibrate = false;
@@ -36,6 +38,12 @@ class Atom {
         this._spinZ = false;
 
         this._enableOrbits = true;
+        /**
+         * This list represents the names of the first 10 elements in the periodic table and is used as a reference when
+         * writing the name of the atom at the top of the page.
+         * @type {string[]}
+         * @private
+         */
         this._names = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon"];
         this._nucleusColor = color(3, 28, 193);
         this._electronColor = color(193, 3, 3);
@@ -60,7 +68,7 @@ class Atom {
     }
 
     /**
-   * Gets the name of the atom (according to the periodic table).
+   * Gets the name of the atom (according to the periodic table) from the list defined in the constructor.
    * @returns {string}
    */
 
@@ -69,7 +77,7 @@ class Atom {
     }
 
     /**
-   * Gets the maximum number of electrons allowed.
+   * Gets the maximum number of electrons allowed in order to prevent crashes from too many electrons.
    * @returns {number}
    */
 
@@ -276,8 +284,8 @@ class Atom {
    * @returns {boolean}
    */
 
-    get noise() {
-        return this._noise;
+    get nucleusNoise() {
+        return this._nucleusNoise;
     }
 
     /**
@@ -286,8 +294,8 @@ class Atom {
    * @returns {undefined} nothing
    */
 
-    set noise(newVal) {
-        this._noise = newVal;
+    set nucleusNoise(newVal) {
+        this._nucleusNoise = newVal;
     }
 
     /**
@@ -436,7 +444,7 @@ class Atom {
     }
 
     /**
-   * Draws the nucleus to the canvas.
+   * Draws the nucleus to the canvas at the coordinates (posX, posY, 0).
    */
 
     drawNucleus() {
@@ -453,7 +461,7 @@ class Atom {
         sphere(this._nucleusRadius);
         pop();
 
-        //If noise is enabled, draw 50 small white lines from the center of the nucleus to the bounding edge.
+        //If nucleusNoise is enabled, draw 50 small white lines from the center of the nucleus to the bounding edge.
         if (this._noise) {
             for (let i = 0; i < 50; i++) {
                 //Generates a random vector then multiplies it by the nucleus radius to prevent lines leaving the sphere.
@@ -461,7 +469,6 @@ class Atom {
                 rand.mult(this._nucleusRadius);
                 //Lines are drawn in white with an alpha value (transparency) of 30.
                 stroke(255, 255, 255, 30);
-                strokeWeight(2);
                 line(this._posX, this._posY, 0, rand.x, rand.y, rand.z);
                 noStroke();
             }
@@ -559,10 +566,13 @@ class Atom {
     }
 
     /**
-     * Cycles through nucleus and electron colors.
+     * Cycles through nucleus and electron colors in order to create a rainbow effect. The HSB color system is used in
+     * order to make color transitions smoother.
+     * @param {number} s - The saturation of the color.
+     * @param {number} b - The brightness of the color.
      */
 
-    cycleColors() {
+    cycleColors(s, b) {
 
         if (this._nucleusColorCycle) {
             if (this._nucleusColorCounter >= 359) {
@@ -571,7 +581,7 @@ class Atom {
                 this._nucleusColorCounter += this._nucleusColorCycleRate;
             }
             console.log(this._nucleusColorCycleRate);
-            this._nucleusColor = color('hsl(' + Math.floor(this._nucleusColorCounter) + ',100%,50%)');
+            this._nucleusColor = color('hsl(' + Math.floor(this._nucleusColorCounter) + ',' + s + '%,' + b + '%)');
         }
 
         if (this._electronColorCycle) {
@@ -591,7 +601,7 @@ class Atom {
 
     draw() {
 
-        this.cycleColors();
+        this.cycleColors(100, 50);
 
         clear();
 

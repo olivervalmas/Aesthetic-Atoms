@@ -95,10 +95,10 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     sz.addEventListener("change", changeSpinZ);
 
-    let n = document.getElementById("noise");
+    let n = document.getElementById("nucleusNoise");
     function changeNoise(event){
-        let val = document.getElementById("noise").checked;
-        atom.noise = val;
+        let val = document.getElementById("nucleusNoise").checked;
+        atom.nucleusNoise = val;
     }
     n.addEventListener("change", changeNoise);
 
