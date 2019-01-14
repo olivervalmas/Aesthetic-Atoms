@@ -14,6 +14,7 @@ class Atom {
     */
 
     constructor(posX=0, posY=0, nucleusRadius=15, rotsPerSec=1, electronCount=3, tailSpheres=15, smoothing=false) {
+
         this._posX = posX;
         this._posY = posY;
         this._nucleusRadius = nucleusRadius;
@@ -26,17 +27,19 @@ class Atom {
         this.generateRandoms(this._maximumNumberOfElectrons);
         this._tailSpheres = tailSpheres;
         this._noise = false;
+
         this._nucleusVibrate = false;
         this._electronVibrate = false;
+
         this._spinX = false;
         this._spinY = false;
         this._spinZ = false;
-        //The speed that the orbits spin around the nucleus.
-        this._spinCoefficient = 1;
+
         this._enableOrbits = true;
         this._names = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon"];
         this._nucleusColor = color(3, 28, 193);
         this._electronColor = color(193, 3, 3);
+
         //Keeps track of spinning in x-axis
         this._counterX = Math.random(100);
         //Keeps track of spinning in y-axis
@@ -44,6 +47,16 @@ class Atom {
         //Keeps track of spinning in z-axis
         this._counterZ = Math.random(100);
         this._smoothing = smoothing;
+
+        this._nucleusColorCounter = 0;
+        this._electronColorCounter = 0;
+
+        this._nucleusColorCycleRate = 10;
+        this._electronColorCycleRate = 10;
+
+        this._nucleusColorCycle = false;
+        this._electronColorCycle = false;
+
     }
 
     /**
@@ -286,6 +299,11 @@ class Atom {
         return this._smoothing;
     }
 
+    /**
+     * Sets whether smoothing is enabled.
+     * @param newVal
+     */
+
     set smoothing(newVal) {
         this._smoothing = newVal;
     }
@@ -315,6 +333,78 @@ class Atom {
 
     get counterZ() {
         return this._counterZ;
+    }
+
+    /**
+     * Gets whether the nucleus has color cycle enabled.
+     * @returns {boolean}
+     */
+
+    get nucleusColorCycle() {
+        return this._nucleusColorCycle;
+    }
+
+    /**
+     * Sets whether the nucleus has color cycle enabled.
+     * @param newVal
+     */
+
+    set nucleusColorCycle(newVal) {
+        this._nucleusColorCycle = newVal;
+    }
+
+    /**
+     * Gets the rate at which the nucleus cycles through colors.
+     * @param newVal
+     */
+
+    get nucleusColorCycleRate() {
+        return this._nucleusColorCycleRate;
+    }
+
+    /**
+     * Sets the rate at which the nucleus cycles through colors.
+     * @param newVal
+     */
+
+    set nucleusColorCycleRate(newVal) {
+        this._nucleusColorCycleRate = newVal;
+    }
+
+    /**
+     * Gets whether the electrons have color cycle enabled.
+     * @returns {boolean}
+     */
+
+    get electronColorCycle() {
+        return this._electronColorCycle;
+    }
+
+    /**
+     * Sets whether the electrons have color cycle enabled.
+     * @param newVal
+     */
+
+    set electronColorCycle(newVal) {
+        this._electronColorCycle = newVal;
+    }
+
+    /**
+     * Gets the rate at which the electron cycles through colors.
+     * @returns {number}
+     */
+
+    get electronColorCycleRate() {
+        return this._electronColorCycleRate;
+    }
+
+    /**
+     * Sets the rate at which the electron cycles through colors.
+     * @param newVal
+     */
+
+    set electronColorCycleRate(newVal) {
+        this._electronColorCycleRate = newVal;
     }
 
     /**
@@ -371,6 +461,7 @@ class Atom {
                 rand.mult(this._nucleusRadius);
                 //Lines are drawn in white with an alpha value (transparency) of 30.
                 stroke(255, 255, 255, 30);
+                strokeWeight(2);
                 line(this._posX, this._posY, 0, rand.x, rand.y, rand.z);
                 noStroke();
             }
@@ -468,10 +559,39 @@ class Atom {
     }
 
     /**
+     * Cycles through nucleus and electron colors.
+     */
+
+    cycleColors() {
+
+        if (this._nucleusColorCycle) {
+            if (this._nucleusColorCounter >= 359) {
+                this._nucleusColorCounter = 0;
+            } else {
+                this._nucleusColorCounter += this._nucleusColorCycleRate;
+            }
+            console.log(this._nucleusColorCycleRate);
+            this._nucleusColor = color('hsl(' + Math.floor(this._nucleusColorCounter) + ',100%,50%)');
+        }
+
+        if (this._electronColorCycle) {
+            if (this._electronColorCounter >= 359) {
+                this._electronColorCounter = 0;
+            } else {
+                this._electronColorCounter += this._electronColorCycleRate;
+            }
+            console.log(this._electronColorCycleRate);
+            this._electronColor = color('hsl(' + Math.floor(this._electronColorCounter) + ',100%,50%)');
+        }
+    }
+
+    /**
    * Draws the nucleus, electrons and orbits to the canvas.
    */
 
     draw() {
+
+        this.cycleColors();
 
         clear();
 
@@ -485,9 +605,9 @@ class Atom {
         rotateY(atom.counterY*PI/16);
         rotateZ(atom.counterZ*PI/16);
 
-        this.incrementCounterX(0.1);
-        this.incrementCounterY(0.1);
-        this.incrementCounterZ(0.1);
+        this.incrementCounterX(0.3);
+        this.incrementCounterY(0.3);
+        this.incrementCounterZ(0.3);
 
         let deltaTime = this.calcDeltaTime();
         /*

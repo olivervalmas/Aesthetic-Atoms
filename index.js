@@ -109,6 +109,20 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     sm.addEventListener("change", changeSmoothing);
 
+    let ncc = document.getElementById("nucleusColorCycle");
+    function changeNucleusColorCycle(event) {
+        let val = document.getElementById("nucleusColorCycle").checked;
+        atom.nucleusColorCycle = val;
+    }
+    ncc.addEventListener("change", changeNucleusColorCycle);
+
+    let ecc = document.getElementById("electronColorCycle");
+    function changeElectronColorCycle(event) {
+        let val = document.getElementById("electronColorCycle").checked;
+        atom.electronColorCycle = val;
+    }
+    ecc.addEventListener("change", changeElectronColorCycle);
+
     let cf = document.getElementById("input_form");
 
     cf.addEventListener("submit", function (event){
