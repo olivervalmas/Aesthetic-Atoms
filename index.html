@@ -36,9 +36,9 @@
       <label for="electronSpeed">Electron Speed</label>
       <input id="electronSpeed" type="range" min="0" max="5" value="0.75" step="0.01" /></br>
       <label for="nucleusColor">Nucleus Color</label>
-      <input id="nucleusColor" type="color" value="#031cc1" />
+      <input id="nucleusColor" type="color"/>
       <label for="electronColor">Electron Color</label>
-      <input id="electronColor" type="color" value="#c10303" /></br>
+      <input id="electronColor" type="color"/></br>
       <label for="spinX">Spin X</label>
       <input id="spinX" type="checkbox" />
       <label for="spinY">Spin Y</label>
@@ -48,9 +48,11 @@
       <label for="noise">Noise</label>
       <input id="noise" type="checkbox" />
       <label for="smoothing">Smoothing</label>
-      <input id="smoothing" type="checkbox" />
+      <input id="smoothing" type="checkbox"/>
     </form>
-    <p>Note: Noise and smoothing both decrease performance slightly.</p>
+    <p>Note: Noise decreases performance slightly.</p>
+    <p>Note: Smoothing increases visual refinement at the cost of a decreased framerate.</p>
+
     <div id="sketch-holder" class="center-block"></div>
     <!--<p>Scary bug :'( https://github.com/processing/p5.js/issues/3180</p>-->
   </div>

@@ -3,14 +3,15 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": ["eslint:recommended"],
+    "extends": "eslint:recommended",
+    "extends": "p5js",
     "parserOptions": {
         "ecmaVersion": 2015
     },
     "rules": {
         "indent": [
             "error",
-            "spaces"
+            4
         ],
         "linebreak-style": [
             "error",
@@ -18,7 +19,7 @@ module.exports = {
         ],
         "quotes": [
             "error",
-            "single"
+            "double"
         ],
         "semi": [
             "error",

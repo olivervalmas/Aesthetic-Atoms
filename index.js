@@ -6,22 +6,15 @@ function setup() {
 
     atom = new Atom(0, 0, 20, 0.75, 3);
     document.getElementById("title").innerHTML = "Aesthetic Atoms: " + atom.name;
+
 }
 
 function draw() {
 
+    //Allows user to drag and move around the world.
     orbitControl();
-
-    clear();
-
     atom.draw();
-
-    if (atom.smoothing) {
-        console.log("smooth");
-        smooth(5);
-    } else {
-        noSmooth();
-    }
+    
 }
 
 function windowResized() {
@@ -60,12 +53,12 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     es.addEventListener("change", changeElectronSpeed);
 
-    let nc = document.getElementById("nucleusColor");
+    let ncol = document.getElementById("nucleusColor");
     function changeNucleusColor(event){
         let val = document.getElementById("nucleusColor").value;
         atom.nucleusColor = val;
     }
-    nc.addEventListener("change", changeNucleusColor);
+    ncol.addEventListener("change", changeNucleusColor);
 
     let ecol = document.getElementById("electronColor");
     function changeElectronColor(event){
