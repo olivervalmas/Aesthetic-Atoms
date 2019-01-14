@@ -36,8 +36,8 @@
     -   [electronVibrate][32]
     -   [electronVibrate][33]
         -   [Parameters][34]
-    -   [noise][35]
-    -   [noise][36]
+    -   [nucleusNoise][35]
+    -   [nucleusNoise][36]
         -   [Parameters][37]
     -   [smoothing][38]
     -   [smoothing][39]
@@ -74,33 +74,35 @@
     -   [incrementCounterZ][70]
         -   [Parameters][71]
     -   [cycleColors][72]
-    -   [draw][73]
+        -   [Parameters][73]
+    -   [draw][74]
 
 ## Atom
 
-A class that represents an atom component.
+A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
+of the model is to be aesthetically pleasing and is therefore not scientifically accurate.
 
 ### Parameters
 
--   `posX` **[number][74]** The x position of the nucleus of the atom. (optional, default `0`)
--   `posY` **[number][74]** The y position of the nucleus of the atom. (optional, default `0`)
--   `nucleusRadius` **[number][74]** The radius of the nucleus, in pixels. (optional, default `15`)
--   `rotsPerSec` **[number][74]** A constant that determines how fast the electrons move around their orbits. (optional, default `1`)
--   `electronCount` **[number][74]** The number of electrons in the atom. (optional, default `3`)
--   `tailSpheres` **[number][74]** The number of spheres that makes up each electron. (optional, default `15`)
--   `smoothing` **[boolean][75]** Whether smoothing is enabled. (optional, default `false`)
+-   `posX` **[number][75]** The x position of the nucleus of the atom. (optional, default `0`)
+-   `posY` **[number][75]** The y position of the nucleus of the atom. (optional, default `0`)
+-   `nucleusRadius` **[number][75]** The radius of the nucleus, in pixels. (optional, default `15`)
+-   `rotsPerSec` **[number][75]** A constant that determines how fast the electrons move around their orbits. (optional, default `1`)
+-   `electronCount` **[number][75]** The number of electrons in the atom. (optional, default `3`)
+-   `tailSpheres` **[number][75]** The number of spheres that makes up each electron. (optional, default `15`)
+-   `smoothing` **[boolean][76]** Whether smoothing is enabled. (optional, default `false`)
 
 ### name
 
-Gets the name of the atom (according to the periodic table).
+Gets the name of the atom (according to the periodic table) from the list defined in the constructor.
 
-Returns **[string][76]** 
+Returns **[string][77]** 
 
 ### maximumNumberOfElectrons
 
-Gets the maximum number of electrons allowed.
+Gets the maximum number of electrons allowed in order to prevent crashes from too many electrons.
 
-Returns **[number][74]** 
+Returns **[number][75]** 
 
 ### nucleusColor
 
@@ -116,7 +118,7 @@ Sets the color of the nucleus.
 
 -   `newColor` **p5.Color** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### electronColor
 
@@ -132,13 +134,13 @@ Sets the color of the electrons.
 
 -   `newColor` **p5.Color** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### nucleusRadius
 
 Gets the radius (in pixels) of the nucleus.
 
-Returns **[number][74]** 
+Returns **[number][75]** 
 
 ### nucleusRadius
 
@@ -146,15 +148,15 @@ Sets the radius (in pixels) of the nucleus.
 
 #### Parameters
 
--   `newRadius` **[number][74]** 
+-   `newRadius` **[number][75]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### electronCount
 
 Gets the current number of electrons in the atom.
 
-Returns **[number][74]** 
+Returns **[number][75]** 
 
 ### electronCount
 
@@ -162,15 +164,15 @@ Sets the current number of electrons in the atom.
 
 #### Parameters
 
--   `newElectronCount` **[number][74]** 
+-   `newElectronCount` **[number][75]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### electronSpeed
 
 Gets the orbital speed of the the electrons.
 
-Returns **[number][74]** 
+Returns **[number][75]** 
 
 ### electronSpeed
 
@@ -178,15 +180,15 @@ Sets the orbital speed of the electrons.
 
 #### Parameters
 
--   `newSpeed` **[number][74]** 
+-   `newSpeed` **[number][75]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### spinX
 
 Gets whether spinning about the x-axis is enabled or disabled.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### spinX
 
@@ -194,15 +196,15 @@ Sets whether spinning about the x-axis is enabled or disabled.
 
 #### Parameters
 
--   `newSpinX` **[boolean][75]** 
+-   `newSpinX` **[boolean][76]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### spinY
 
 Gets whether spinning about the y-axis is enabled or disabled.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### spinY
 
@@ -210,15 +212,15 @@ Sets whether spinning about the y-axis is enabled or disabled.
 
 #### Parameters
 
--   `newSpinY` **[boolean][75]** 
+-   `newSpinY` **[boolean][76]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### spinZ
 
 Gets whether spinning about the z-axis is enabled or disabled.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### spinZ
 
@@ -226,15 +228,15 @@ Sets whether spinning about the z-axis is enabled or disabled.
 
 #### Parameters
 
--   `newSpinZ` **[boolean][75]** 
+-   `newSpinZ` **[boolean][76]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### nucleusVibrate
 
 Gets whether the nucleus is vibrating.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### nucleusVibrate
 
@@ -242,15 +244,15 @@ Sets whether the nucleus is vibrating.
 
 #### Parameters
 
--   `newVal` **[boolean][75]** 
+-   `newVal` **[boolean][76]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### electronVibrate
 
 Gets whether the electrons are vibrating.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### electronVibrate
 
@@ -258,31 +260,31 @@ Sets whether the electrons are vibrating.
 
 #### Parameters
 
--   `newVal` **[boolean][75]** 
+-   `newVal` **[boolean][76]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
-### noise
+### nucleusNoise
 
 Gets whether the nucleus has noise.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
-### noise
+### nucleusNoise
 
 Sets whether the nucleus has noise.
 
 #### Parameters
 
--   `newVal` **[boolean][75]** 
+-   `newVal` **[boolean][76]** 
 
-Returns **[undefined][77]** nothing
+Returns **[undefined][78]** nothing
 
 ### smoothing
 
 Gets whether smoothing is enabled.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### smoothing
 
@@ -296,25 +298,25 @@ Sets whether smoothing is enabled.
 
 Gets the counterX value.
 
-Returns **[number][74]** \_counterX
+Returns **[number][75]** \_counterX
 
 ### counterY
 
 Gets the counterY value.
 
-Returns **[number][74]** \_counterY
+Returns **[number][75]** \_counterY
 
 ### counterZ
 
 Gets the counterZ value.
 
-Returns **[number][74]** \_counterZ
+Returns **[number][75]** \_counterZ
 
 ### nucleusColorCycle
 
 Gets whether the nucleus has color cycle enabled.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### nucleusColorCycle
 
@@ -344,7 +346,7 @@ Sets the rate at which the nucleus cycles through colors.
 
 Gets whether the electrons have color cycle enabled.
 
-Returns **[boolean][75]** 
+Returns **[boolean][76]** 
 
 ### electronColorCycle
 
@@ -358,7 +360,7 @@ Sets whether the electrons have color cycle enabled.
 
 Gets the rate at which the electron cycles through colors.
 
-Returns **[number][74]** 
+Returns **[number][75]** 
 
 ### electronColorCycleRate
 
@@ -375,17 +377,17 @@ These random rotations determine the starting location of each atom meaning that
 
 #### Parameters
 
--   `numberOfRandoms` **[number][74]** 
+-   `numberOfRandoms` **[number][75]** 
 
 ### calcDeltaTime
 
 Calculates the time passed between each call of draw().
 
-Returns **[number][74]** 
+Returns **[number][75]** 
 
 ### drawNucleus
 
-Draws the nucleus to the canvas.
+Draws the nucleus to the canvas at the coordinates (posX, posY, 0).
 
 ### drawElectrons
 
@@ -397,7 +399,7 @@ Draws a specific electron and tail. Its position relative to other electrons is 
 
 #### Parameters
 
--   `index` **[number][74]** 
+-   `index` **[number][75]** 
 
 ### drawOrbits
 
@@ -405,7 +407,7 @@ Draws the orbit for each electron onto the canvas.
 
 #### Parameters
 
--   `thickness` **[number][74]** The thickness of the orbit.
+-   `thickness` **[number][75]** The thickness of the orbit.
 
 ### incrementCounterX
 
@@ -413,7 +415,7 @@ Increment counterX by amount if spinX is enabled.
 
 #### Parameters
 
--   `amount` **[number][74]** 
+-   `amount` **[number][75]** 
 
 ### incrementCounterY
 
@@ -421,7 +423,7 @@ Increment counterY by amount if spinY is enabled.
 
 #### Parameters
 
--   `amount` **[number][74]** 
+-   `amount` **[number][75]** 
 
 ### incrementCounterZ
 
@@ -429,11 +431,17 @@ Increment counterZ by amount if spinZ is enabled.
 
 #### Parameters
 
--   `amount` **[number][74]** 
+-   `amount` **[number][75]** 
 
 ### cycleColors
 
-Cycles through nucleus and electron colors.
+Cycles through nucleus and electron colors in order to create a rainbow effect. The HSB color system is used in
+order to make color transitions smoother.
+
+#### Parameters
+
+-   `s` **[number][75]** The saturation of the color.
+-   `b` **[number][75]** The brightness of the color.
 
 ### draw
 
@@ -507,9 +515,9 @@ Draws the nucleus, electrons and orbits to the canvas.
 
 [34]: #parameters-10
 
-[35]: #noise
+[35]: #nucleusnoise
 
-[36]: #noise-1
+[36]: #nucleusnoise-1
 
 [37]: #parameters-11
 
@@ -583,12 +591,14 @@ Draws the nucleus, electrons and orbits to the canvas.
 
 [72]: #cyclecolors
 
-[73]: #draw
+[73]: #parameters-24
 
-[74]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[74]: #draw
 
-[75]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[75]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[76]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[76]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[77]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+[77]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[78]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
