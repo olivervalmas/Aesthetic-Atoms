@@ -79,9 +79,6 @@
 
 ## Atom
 
-A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
-of the model is to be aesthetically pleasing and is therefore not scientifically accurate.
-
 ### Parameters
 
 -   `posX` **[number][75]** The x position of the nucleus of the atom. (optional, default `0`)
@@ -440,12 +437,24 @@ order to make color transitions smoother.
 
 #### Parameters
 
--   `s` **[number][75]** The saturation of the color.
--   `b` **[number][75]** The brightness of the color.
+-   `saturation` **[number][75]** The saturation of the color.
+-   `brightness` **[number][75]** The brightness of the color.
 
 ### draw
 
 Draws the nucleus, electrons and orbits to the canvas.
+
+## 
+
+Original sketch name: Atom
+
+Original author: Canopus ([https://www.openprocessing.org/user/135028][79])
+
+Link: [https://www.openprocessing.org/sketch/578925][80]
+
+**Meta**
+
+-   **license**: CC-BY-1.0
 
 [1]: #atom
 
@@ -602,3 +611,7 @@ Draws the nucleus, electrons and orbits to the canvas.
 [77]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
 [78]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
+
+[79]: https://www.openprocessing.org/user/135028
+
+[80]: https://www.openprocessing.org/sketch/578925

@@ -1,4 +1,4 @@
-/** A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
+/** @classdesc A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
  * of the model is to be aesthetically pleasing and is therefore not scientifically accurate. */
 
 class Atom {
@@ -568,11 +568,11 @@ class Atom {
     /**
      * Cycles through nucleus and electron colors in order to create a rainbow effect. The HSB color system is used in
      * order to make color transitions smoother.
-     * @param {number} s - The saturation of the color.
-     * @param {number} b - The brightness of the color.
+     * @param {number} saturation - The saturation of the color.
+     * @param {number} brightness - The brightness of the color.
      */
 
-    cycleColors(s, b) {
+    cycleColors(saturation, brightness) {
 
         if (this._nucleusColorCycle) {
             if (this._nucleusColorCounter >= 359) {
@@ -581,7 +581,7 @@ class Atom {
                 this._nucleusColorCounter += this._nucleusColorCycleRate;
             }
             console.log(this._nucleusColorCycleRate);
-            this._nucleusColor = color('hsl(' + Math.floor(this._nucleusColorCounter) + ',' + s + '%,' + b + '%)');
+            this._nucleusColor = color('hsl(' + Math.floor(this._nucleusColorCounter) + ',' + saturation + '%,' + brightness + '%)');
         }
 
         if (this._electronColorCycle) {
@@ -591,7 +591,7 @@ class Atom {
                 this._electronColorCounter += this._electronColorCycleRate;
             }
             console.log(this._electronColorCycleRate);
-            this._electronColor = color('hsl(' + Math.floor(this._electronColorCounter) + ',100%,50%)');
+            this._electronColor = color('hsl(' + Math.floor(this._electronColorCounter) + ',' + saturation + '%,' + brightness + '%)');
         }
     }
 
@@ -638,4 +638,14 @@ class Atom {
         //Resets this._old so that calcDeltaTime() can be called again.
         this._old = this._now;
     }
+
+    /**
+     * Original sketch name: Atom
+     *
+     * Original author: Canopus (https://www.openprocessing.org/user/135028)
+     *
+     * Link: https://www.openprocessing.org/sketch/578925
+     *
+     * @license CC-BY-1.0
+     */
 }
