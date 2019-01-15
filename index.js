@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function(){
     function changeNoise(event){
         let val = document.getElementById("nucleusNoise").checked;
         atom.nucleusNoise = val;
+        console.log("hello")
     }
     n.addEventListener("change", changeNoise);
 

@@ -1,4 +1,4 @@
-/** @classdesc A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
+/** @class A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
  * of the model is to be aesthetically pleasing and is therefore not scientifically accurate. */
 
 class Atom {
@@ -462,7 +462,7 @@ class Atom {
         pop();
 
         //If nucleusNoise is enabled, draw 50 small white lines from the center of the nucleus to the bounding edge.
-        if (this._noise) {
+        if (this._nucleusNoise) {
             for (let i = 0; i < 50; i++) {
                 //Generates a random vector then multiplies it by the nucleus radius to prevent lines leaving the sphere.
                 let rand = p5.Vector.random3D();
@@ -646,6 +646,6 @@ class Atom {
      *
      * Link: https://www.openprocessing.org/sketch/578925
      *
-     * @license CC-BY-1.0
+     * @license CC BY-SA 3.0
      */
 }
