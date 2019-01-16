@@ -599,44 +599,61 @@ class Atom {
    * Draws the nucleus, electrons and orbits to the canvas.
    */
 
-    draw() {
+    draw(g) {
 
-        this.cycleColors(100, 50);
+        if (g) {
+            clear();
+            g.background(255);
+            g.fill(255,32,165);
+            g.cone(50,50);
+            g.rotateX(frameCount/10000);
+            g.rotateY(frameCount/10000);
 
-        clear();
+            texture(g);
+            rotateX(frameCount/100);
+            rotateY(frameCount/100);
+            box(200);
 
-        if (atom.smoothing) {
-            smooth();
+
         } else {
-            noSmooth();
+
+            this.cycleColors(100, 50);
+
+            clear();
+
+            if (atom.smoothing) {
+                smooth();
+            } else {
+                noSmooth();
+            }
+
+            rotateX(atom.counterX * PI / 16);
+            rotateY(atom.counterY * PI / 16);
+            rotateZ(atom.counterZ * PI / 16);
+
+            this.incrementCounterX(0.3);
+            this.incrementCounterY(0.3);
+            this.incrementCounterZ(0.3);
+
+            let deltaTime = this.calcDeltaTime();
+            /*
+        A bunch of maths that increments the rotation variable depending on the time since the draw function was last called.
+        This keeps things looking smooth and consistent if the framerate fluctuates.
+         */
+            this._rotation += (deltaTime * 2 * PI * this._rotsPerSec / 1000);
+            noStroke();
+
+            this.drawNucleus();
+
+            if (this._enableOrbits) {
+                this.drawOrbits(0.75);
+            }
+
+            this.drawElectrons();
+
+            //Resets this._old so that calcDeltaTime() can be called again.
+            this._old = this._now;
         }
-
-        rotateX(atom.counterX*PI/16);
-        rotateY(atom.counterY*PI/16);
-        rotateZ(atom.counterZ*PI/16);
-
-        this.incrementCounterX(0.3);
-        this.incrementCounterY(0.3);
-        this.incrementCounterZ(0.3);
-
-        let deltaTime = this.calcDeltaTime();
-        /*
-    A bunch of maths that increments the rotation variable depending on the time since the draw function was last called.
-    This keeps things looking smooth and consistent if the framerate fluctuates.
-     */
-        this._rotation += (deltaTime * 2 * PI * this._rotsPerSec / 1000);
-        noStroke();
-
-        this.drawNucleus();
-
-        if (this._enableOrbits) {
-            this.drawOrbits(0.75);
-        }
-
-        this.drawElectrons();
-
-        //Resets this._old so that calcDeltaTime() can be called again.
-        this._old = this._now;
     }
 
     /**

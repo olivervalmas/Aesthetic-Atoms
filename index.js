@@ -7,13 +7,17 @@ function setup() {
     atom = new Atom(0, 0, 20, 0.75, 3);
     document.getElementById("title").innerHTML = "Aesthetic Atoms: " + atom.name;
 
+    g = createGraphics(200, 200, WEBGL);
+
 }
 
 function draw() {
 
     //Allows user to drag and move around the world.
     orbitControl();
+
     atom.draw();
+
     
 }
 
