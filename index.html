@@ -3,72 +3,92 @@
 <html lang="en">
 
 <head>
-  <title>Aesthetic Atoms</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
-  <script type="text/javascript" src="index.js"></script>
-  <script type="text/javascript" src="atom.js"></script>
-  <style>
-    h1, p {
+    <title>Aesthetic Atoms</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="atom.js"></script>
+    <style>
+
+        h1 {
             text-align: center;
         }
-    form {
-            margin: 0 auto;
-            width:600px;
+
+        body {
+            overflow: hidden;
+        }
+
+        form {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-  <div>
+<div>
+    <div style="width: 50%; float:left; padding-left: 50px; padding-right:5px; padding-top: 20px">
+        <h1 id="title">Aesthetic Atoms</h1>
+        <p class="lead">This is a demonstration of an application of my p5.js component. Use the controls below to
+            change
+            the appearance of the sketch on the right. Use the mouse to drag around the atom and scroll to zoom in and
+            out.</p>
+        <p>See the documentation (README.md) for details on what each attribute does.</p>
 
-    <h1 id="title">Aesthetic Atoms</h1>
-    <p class="lead">This is a demonstration of an application of my p5.js component.</p>
+        <form id="input_form">
+            <label for="nucleusRadius">Nucleus Radius</label>
+            <input id="nucleusRadius" type="number" min="5" max="1000" value="20"/>
+            <label for="electronCount">Electron Count</label>
+            <input id="electronCount" type="number" min="1" max="10" value="3"/></br>
 
-    <form id="input_form">
-      <label for="nucleusRadius">Nucleus Radius</label>
-      <input id="nucleusRadius" type="number" min="5" max="1000" value="20" />
-      <label for="electronCount">Electron Count</label>
-      <input id="electronCount" type="number" min="1" max="10" value="3" />
+            <label for="nucleusVibrate">Nucleus Vibration</label>
+            <input id="nucleusVibrate" type="checkbox"/>
+            <label for="electronVibrate">Electron Vibration</label>
+            <input id="electronVibrate" type="checkbox"/></br>
 
-      <label for="nucleusVibrate">Nucleus Vibration</label>
-      <input id="nucleusVibrate" type="checkbox" />
-      <label for="electronVibrate">Electron Vibration</label>
-      <input id="electronVibrate" type="checkbox" />
+            <label for="electronSpeed">Electron Speed</label>
+            <input id="electronSpeed" type="range" min="0" max="5" value="0.75" step="0.01"/>
+            <label for="nucleusColor">Nucleus Color</label>
+            <input id="nucleusColor" type="color" value="#031cc1"/>
+            <label for="electronColor">Electron Color</label>
+            <input id="electronColor" type="color" value="#c10303"/></br>
 
-      <label for="electronSpeed">Electron Speed</label>
-      <input id="electronSpeed" type="range" min="0" max="5" value="0.75" step="0.01" /></br>
-      <label for="nucleusColor">Nucleus Color</label>
-      <input id="nucleusColor" type="color"/>
-      <label for="electronColor">Electron Color</label>
-      <input id="electronColor" type="color"/></br>
+            <label for="nucleusColorCycle">Nucleus Color Cycle</label>
+            <input id="nucleusColorCycle" type="checkbox"/>
 
-      <label for="nucleusColorCycle">Nucleus Color Cycle</label>
-      <input id="nucleusColorCycle" type="checkbox"/></br>
+            <label for="electronColorCycle">Electron Color Cycle</label>
+            <input id="electronColorCycle" type="checkbox"/></br>
 
-      <label for="electronColorCycle">Electron Color Cycle</label>
-      <input id="electronColorCycle" type="checkbox"/></br>
+            <label for="spinX">Spin X</label>
+            <input id="spinX" type="checkbox"/>
+            <label for="spinY">Spin Y</label>
+            <input id="spinY" type="checkbox"/>
+            <label for="spinZ">Spin Z</label>
+            <input id="spinZ" type="checkbox"/></br>
 
-      <label for="spinX">Spin X</label>
-      <input id="spinX" type="checkbox" />
-      <label for="spinY">Spin Y</label>
-      <input id="spinY" type="checkbox" />
-      <label for="spinZ">Spin Z</label>
-      <input id="spinZ" type="checkbox" /></br>
+            <label for="nucleusNoise">Nucleus Noise</label>
+            <input id="nucleusNoise" type="checkbox"/>
+            <label for="smoothing">Smoothing</label>
+            <input id="smoothing" type="checkbox"/>
 
-      <label for="nucleusNoise">Nucleus Noise</label>
-      <input id="nucleusNoise" type="checkbox" />
-      <label for="smoothing">Smoothing</label>
-      <input id="smoothing" type="checkbox"/>
-    </form>
+            <label for="cube">Draw to Cube</label>
+            <input id="cube" type="checkbox"/>
+        </form>
+        <p>Notes:</p>
+        <ul>
+            <li>Noise decreases performance slightly.</li>
+            <li>Smoothing increases visual refinement at the cost of a decreased framerate.</li>
+            <li>Draw to Cube: Drawing a 3D sketch to a 3D object results in unexpected graphical glitches and/or
+                behaviour.
+                This functionality is included purely as a proof of concept.
+            </li>
+        </ul>
+    </div>
 
-    <p>Note: Noise decreases performance slightly.</p>
-    <p>Note: Smoothing increases visual refinement at the cost of a decreased framerate.</p>
-
-    <div id="sketch-holder" class="center-block"></div>
-    <!--<p>Scary bug :'( https://github.com/processing/p5.js/issues/3180</p>-->
-  </div>
+    <div style="width: 50%; float:right; padding-left: 5px; padding-right: 50px; padding-top: 20px" id="sketch-holder">
+    </div>
+</div>
 </body>
 
 </html>

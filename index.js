@@ -1,14 +1,13 @@
 function setup() {
 
-    let canvas = createCanvas(windowWidth, 400, WEBGL);
+    let canvas = createCanvas(windowWidth/2,400, WEBGL);
     canvas.parent("sketch-holder");
     canvas.style('display', 'block');
 
-    atom = new Atom(0, 0, 20, 0.75, 3);
+    atom = new Atom();
     document.getElementById("title").innerHTML = "Aesthetic Atoms: " + atom.name;
 
-    g = createGraphics(200, 200, WEBGL);
-
+    g = createGraphics(windowWidth/2, 400, WEBGL);
 }
 
 function draw() {
@@ -16,13 +15,16 @@ function draw() {
     //Allows user to drag and move around the world.
     orbitControl();
 
-    atom.draw();
+    if (atom.cubeEnabled) {
+        atom.draw(g);
+    } else {
+        atom.draw();
+    }
 
-    
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth, 400);
+    resizeCanvas(windowWidth/2, 400);
 }
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -103,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function(){
     function changeNoise(event){
         let val = document.getElementById("nucleusNoise").checked;
         atom.nucleusNoise = val;
-        console.log("hello")
     }
     n.addEventListener("change", changeNoise);
 
@@ -127,6 +128,14 @@ document.addEventListener("DOMContentLoaded", function(){
         atom.electronColorCycle = val;
     }
     ecc.addEventListener("change", changeElectronColorCycle);
+
+    let cube = document.getElementById("cube");
+    function changeCubeStatus(event) {
+        let val = document.getElementById("cube").checked;
+        atom.cubeEnabled = val;
+        this.setup();
+    }
+    cube.addEventListener("change", changeCubeStatus);
 
     let cf = document.getElementById("input_form");
 

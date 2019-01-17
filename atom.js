@@ -4,18 +4,18 @@
 class Atom {
 
     /**
-   * Create an atom according to the parameters.
+     * Create an atom.
      *
-   * @param {number} posX - The x position of the nucleus of the atom.
-   * @param {number} posY - The y position of the nucleus of the atom.
-   * @param {number} nucleusRadius - The radius of the nucleus, in pixels.
-   * @param {number} rotsPerSec - A constant that determines how fast the electrons move around their orbits.
-   * @param {number} electronCount - The number of electrons in the atom.
-   * @param {number} tailSpheres - The number of spheres that makes up each electron.
-   * @param {boolean} smoothing - Whether smoothing is enabled.
-    */
+     * @param {number} posX - The x position of the nucleus of the atom.
+     * @param {number} posY - The y position of the nucleus of the atom.
+     * @param {number} nucleusRadius - The radius of the nucleus, in pixels.
+     * @param {number} rotsPerSec - A constant that determines how fast the electrons move around their orbits.
+     * @param {number} electronCount - The number of electrons in the atom.
+     * @param {number} tailSpheres - The number of spheres that makes up each electron.
+     * @param {boolean} smoothing - Whether smoothing is enabled.
+     */
 
-    constructor(posX=0, posY=0, nucleusRadius=15, rotsPerSec=1, electronCount=3, tailSpheres=15, smoothing=false) {
+    constructor(posX = 0, posY = 0, nucleusRadius = 20, rotsPerSec = 0.75, electronCount = 3, tailSpheres = 15, smoothing = false) {
 
         this._posX = posX;
         this._posY = posY;
@@ -38,12 +38,11 @@ class Atom {
         this._spinZ = false;
 
         this._enableOrbits = true;
-        /**
+        /*
          * This list represents the names of the first 10 elements in the periodic table and is used as a reference when
          * writing the name of the atom at the top of the page.
-         * @type {string[]}
-         * @private
          */
+
         this._names = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon"];
         this._nucleusColor = color(3, 28, 193);
         this._electronColor = color(193, 3, 3);
@@ -65,243 +64,238 @@ class Atom {
         this._nucleusColorCycle = false;
         this._electronColorCycle = false;
 
+        this._cubeEnabled = false;
+
     }
 
     /**
-   * Gets the name of the atom (according to the periodic table) from the list defined in the constructor.
-   * @returns {string}
-   */
+     * Gets the name of the atom (according to the periodic table) from the list defined in the constructor.
+     * @returns {string}
+     */
 
     get name() {
         return this._names[this._electronCount - 1];
     }
 
     /**
-   * Gets the maximum number of electrons allowed in order to prevent crashes from too many electrons.
-   * @returns {number}
-   */
+     * Gets the maximum number of electrons allowed in order to prevent crashes from too many electrons.
+     * @returns {number}
+     */
 
     get maximumNumberOfElectrons() {
         return this._maximumNumberOfElectrons;
     }
 
     /**
-   * Gets the color of the nucleus.
-   * @returns {p5.Color}
-   */
+     * Gets the color of the nucleus.
+     * @returns {p5.Color}
+     */
 
     get nucleusColor() {
         return this._nucleusColor;
     }
 
     /**
-   * Sets the color of the nucleus.
-   * @param {p5.Color} newColor
-   * @returns {undefined} nothing
-   */
+     * Sets the color of the nucleus.
+     * @param {p5.Color} newColor
+     */
 
     set nucleusColor(newColor) {
         this._nucleusColor = newColor;
     }
 
     /**
-   * Gets the color of the electrons.
-   * @returns {p5.Color}
-   */
+     * Gets the color of the electrons.
+     * @returns {p5.Color}
+     */
 
     get electronColor() {
         return this._electronColor;
     }
 
     /**
-   * Sets the color of the electrons.
-   * @param {p5.Color} newColor
-   * @returns {undefined} nothing
-   */
+     * Sets the color of the electrons.
+     * @param {p5.Color} newColor
+     */
 
     set electronColor(newColor) {
         this._electronColor = newColor;
     }
 
     /**
-   * Gets the radius (in pixels) of the nucleus.
-   * @returns {number}
-   */
+     * Gets the radius (in pixels) of the nucleus.
+     * @returns {number}
+     */
 
     get nucleusRadius() {
         return this._nucleusRadius;
     }
 
     /**
-   * Sets the radius (in pixels) of the nucleus.
-   * @param {number} newRadius
-   * @returns {undefined} nothing
-   */
+     * Sets the radius (in pixels) of the nucleus.
+     * @param {number} newRadius
+     */
 
     set nucleusRadius(newRadius) {
-        this._nucleusRadius = newRadius;
-        /* Here we update the radius of the whole atom every time we change the nucleus radius
-    so that everything stays nicely proportioned. */
-        this._radius = newRadius * 8;
+        if (newRadius >= 0) {
+            this._nucleusRadius = newRadius;
+            /* Here we update the radius of the whole atom every time we change the nucleus radius
+        so that everything stays nicely proportioned. */
+            this._radius = newRadius * 8;
+        }
     }
 
     /**
-   * Gets the current number of electrons in the atom.
-   * @returns {number}
-   */
+     * Gets the current number of electrons in the atom.
+     * @returns {number}
+     */
 
     get electronCount() {
         return this._electronCount;
     }
 
     /**
-   * Sets the current number of electrons in the atom.
-   * @param {number} newElectronCount
-   * @returns {undefined} nothing
-   */
+     * Sets the current number of electrons in the atom.
+     * @param {number} newElectronCount
+     */
 
     set electronCount(newElectronCount) {
-        this._electronCount = newElectronCount;
-        this._deltaAngle = PI / this.electronCount;
+        if (newElectronCount <= this.maximumNumberOfElectrons) {
+            this._electronCount = newElectronCount;
+            this._deltaAngle = PI / this._electronCount;
+        }
     }
 
     /**
-   * Gets the orbital speed of the the electrons.
-   * @returns {number}
-   */
+     * Gets the orbital speed of the the electrons.
+     * @returns {number}
+     */
 
     get electronSpeed() {
         return this._rotsPerSec;
     }
 
     /**
-   * Sets the orbital speed of the electrons.
-   * @param {number} newSpeed
-   * @returns {undefined} nothing
-   */
+     * Sets the orbital speed of the electrons.
+     * @param {number} newSpeed
+     */
 
     set electronSpeed(newSpeed) {
         this._rotsPerSec = newSpeed;
     }
 
     /**
-   * Gets whether spinning about the x-axis is enabled or disabled.
-   * @returns {boolean}
-   */
+     * Gets whether spinning about the x-axis is enabled or disabled.
+     * @returns {boolean}
+     */
 
     get spinX() {
         return this._spinX;
     }
 
     /**
-   * Sets whether spinning about the x-axis is enabled or disabled.
-   * @param {boolean} newSpinX
-   * @returns {undefined} nothing
-   */
+     * Sets whether spinning about the x-axis is enabled or disabled.
+     * @param {boolean} newSpinX
+     */
 
     set spinX(newSpinX) {
         this._spinX = newSpinX;
     }
 
     /**
-   * Gets whether spinning about the y-axis is enabled or disabled.
-   * @returns {boolean}
-   */
+     * Gets whether spinning about the y-axis is enabled or disabled.
+     * @returns {boolean}
+     */
 
     get spinY() {
         return this._spinY;
     }
 
     /**
-   * Sets whether spinning about the y-axis is enabled or disabled.
-   * @param {boolean} newSpinY
-   * @returns {undefined} nothing
-   */
+     * Sets whether spinning about the y-axis is enabled or disabled.
+     * @param {boolean} newSpinY
+     */
 
     set spinY(newSpinY) {
         this._spinY = newSpinY;
     }
 
     /**
-   * Gets whether spinning about the z-axis is enabled or disabled.
-   * @returns {boolean}
-   */
+     * Gets whether spinning about the z-axis is enabled or disabled.
+     * @returns {boolean}
+     */
 
     get spinZ() {
         return this._spinZ;
     }
 
     /**
-   * Sets whether spinning about the z-axis is enabled or disabled.
-   * @param {boolean} newSpinZ
-   * @returns {undefined} nothing
-   */
+     * Sets whether spinning about the z-axis is enabled or disabled.
+     * @param {boolean} newSpinZ
+     */
 
     set spinZ(newSpinZ) {
         this._spinZ = newSpinZ;
     }
 
     /**
-   * Gets whether the nucleus is vibrating.
-   * @returns {boolean}
-   */
+     * Gets whether the nucleus is vibrating.
+     * @returns {boolean}
+     */
 
     get nucleusVibrate() {
         return this._nucleusVibrate;
     }
 
     /**
-   * Sets whether the nucleus is vibrating.
-   * @param {boolean} newVal
-   * @returns {undefined} nothing
-   */
+     * Sets whether the nucleus is vibrating.
+     * @param {boolean} newVal
+     */
 
     set nucleusVibrate(newVal) {
         this._nucleusVibrate = newVal;
     }
 
     /**
-   * Gets whether the electrons are vibrating.
-   * @returns {boolean}
-   */
+     * Gets whether the electrons are vibrating.
+     * @returns {boolean}
+     */
 
     get electronVibrate() {
         return this._electronVibrate;
     }
 
     /**
-   * Sets whether the electrons are vibrating.
-   * @param {boolean} newVal
-   * @returns {undefined} nothing
-   */
+     * Sets whether the electrons are vibrating.
+     * @param {boolean} newVal
+     */
 
     set electronVibrate(newVal) {
         this._electronVibrate = newVal;
     }
 
     /**
-   * Gets whether the nucleus has noise.
-   * @returns {boolean}
-   */
+     * Gets whether the nucleus has noise.
+     * @returns {boolean}
+     */
 
     get nucleusNoise() {
         return this._nucleusNoise;
     }
 
     /**
-   * Sets whether the nucleus has noise.
-   * @param {boolean} newVal
-   * @returns {undefined} nothing
-   */
+     * Sets whether the nucleus has noise.
+     * @param {boolean} newVal
+     */
 
     set nucleusNoise(newVal) {
         this._nucleusNoise = newVal;
     }
 
     /**
-   * Gets whether smoothing is enabled.
-   * @returns {boolean}
-   */
+     * Gets whether smoothing is enabled.
+     * @returns {boolean}
+     */
 
     get smoothing() {
         return this._smoothing;
@@ -317,27 +311,27 @@ class Atom {
     }
 
     /**
-   * Gets the counterX value.
-   * @returns {number} _counterX
-   */
+     * Gets the counterX value.
+     * @returns {number} _counterX
+     */
 
     get counterX() {
         return this._counterX;
     }
 
     /**
-   * Gets the counterY value.
-   * @returns {number} _counterY
-   */
+     * Gets the counterY value.
+     * @returns {number} _counterY
+     */
 
     get counterY() {
         return this._counterY;
     }
 
     /**
-   * Gets the counterZ value.
-   * @returns {number} _counterZ
-   */
+     * Gets the counterZ value.
+     * @returns {number} _counterZ
+     */
 
     get counterZ() {
         return this._counterZ;
@@ -416,22 +410,40 @@ class Atom {
     }
 
     /**
-   * Generates 20 random rotations between 0 and 2π.
-   * These random rotations determine the starting location of each atom meaning that they are not all in sync.
-   * @param {number} numberOfRandoms
-   */
+     * Gets whether drawing the sketch to a 3D cube is enabled.
+     * @returns {boolean}
+     */
+
+    get cubeEnabled() {
+        return this._cubeEnabled;
+    }
+
+    /**
+     * Sets whether drawing the sketch to a 3D cube is enabled.
+     * @param newVal
+     */
+
+    set cubeEnabled(newVal) {
+        this._cubeEnabled = newVal;
+    }
+
+    /**
+     * Generates 20 random rotations between 0 and 2π.
+     * These random rotations determine the starting location of each atom meaning that they are not all in sync.
+     * @param {number} numberOfRandoms
+     */
 
     generateRandoms(numberOfRandoms) {
         this._randoms = [];
-        for (let i = 0; i < numberOfRandoms+1; i++) {
+        for (let i = 0; i < numberOfRandoms + 1; i++) {
             this._randoms.push(random(2 * PI));
         }
     }
 
     /**
-   * Calculates the time passed between each call of draw().
-   * @returns {number}
-   */
+     * Calculates the time passed between each call of draw().
+     * @returns {number}
+     */
 
     calcDeltaTime() {
         this._old;
@@ -444,56 +456,100 @@ class Atom {
     }
 
     /**
-   * Draws the nucleus to the canvas at the coordinates (posX, posY, 0).
-   */
+     * Draws the nucleus to the canvas.
+     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     */
 
-    drawNucleus() {
+    drawNucleus(g) {
 
-        push();
-        if (this._nucleusVibrate) {
-            translate(this._posX + random(-2, 2), this._posY + random(-2, 2));
-        } else {
-            translate(this._posX, this._posY);
-        }
+        if (g) {
 
-        //Draws a sphere to the canvas in the specified color.
-        fill(this._nucleusColor);
-        sphere(this._nucleusRadius);
-        pop();
-
-        //If nucleusNoise is enabled, draw 50 small white lines from the center of the nucleus to the bounding edge.
-        if (this._nucleusNoise) {
-            for (let i = 0; i < 50; i++) {
-                //Generates a random vector then multiplies it by the nucleus radius to prevent lines leaving the sphere.
-                let rand = p5.Vector.random3D();
-                rand.mult(this._nucleusRadius);
-                //Lines are drawn in white with an alpha value (transparency) of 30.
-                stroke(255, 255, 255, 30);
-                line(this._posX, this._posY, 0, rand.x, rand.y, rand.z);
-                noStroke();
+            g.push();
+            if (this._nucleusVibrate) {
+                //If nucleus vibration is on then we randomly move it slightly off center each time we draw it.
+                g.translate(this._posX + random(-2, 2), this._posY + random(-2, 2));
+            } else {
+                g.translate(this._posX, this._posY);
             }
+
+            //Draws a sphere to the canvas in the specified color.
+            g.fill(this._nucleusColor);
+            g.sphere(this._nucleusRadius / 2);
+            g.pop();
+
+            //If nucleusNoise is enabled, draw 50 small white lines from the center of the nucleus to the bounding edge.
+            if (this._nucleusNoise) {
+                for (let i = 0; i < 50; i++) {
+                    //Generates a random vector then multiplies it by the nucleus radius to prevent lines leaving the sphere.
+                    let rand = p5.Vector.random3D();
+                    rand.mult(this._nucleusRadius / 2);
+                    //Lines are drawn in white with an alpha value (transparency) of 30.
+                    g.stroke(255, 255, 255, 30);
+                    g.line(this._posX, this._posY, 0, rand.x, rand.y, rand.z);
+                    g.noStroke();
+                }
+            }
+
+        } else {
+
+            push();
+            if (this._nucleusVibrate) {
+                //If nucleus vibration is on then we randomly move it slightly off center each time we draw it.
+                translate(this._posX + random(-2, 2), this._posY + random(-2, 2));
+            } else {
+                translate(this._posX, this._posY);
+            }
+
+            //Draws a sphere to the canvas in the specified color.
+            fill(this._nucleusColor);
+            sphere(this._nucleusRadius);
+            pop();
+
+            //If nucleusNoise is enabled, draw 50 small white lines from the center of the nucleus to the bounding edge.
+            if (this._nucleusNoise) {
+                for (let i = 0; i < 50; i++) {
+                    //Generates a random vector then multiplies it by the nucleus radius to prevent lines leaving the sphere.
+                    let rand = p5.Vector.random3D();
+                    rand.mult(this._nucleusRadius);
+                    //Lines are drawn in white with an alpha value (transparency) of 30.
+                    stroke(255, 255, 255, 30);
+                    line(this._posX, this._posY, 0, rand.x, rand.y, rand.z);
+                    noStroke();
+                }
+            }
+
         }
+
+
     }
 
     /**
-   * Draws the specified number of electrons to the canvas.
-   */
+     * Draws the specified number of electrons to the canvas.
+     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     */
 
-    drawElectrons() {
+    drawElectrons(g) {
         for (let i = 0; i < this._electronCount; i++) {
             //Rotates the canvas by deltaAngle then draws each electron.
-            rotateZ(this._deltaAngle);
-            this.drawElectron(i);
+            if (g) {
+                g.rotateZ(this._deltaAngle);
+                this.drawElectron(g, i);
+            } else {
+                rotateZ(this._deltaAngle);
+                this.drawElectron(false, i);
+            }
+
         }
     }
 
     /**
-   * Draws a specific electron and tail. Its position relative to other electrons is determined by the index of the electron.
-   * @param {number} index
-   */
+     * Draws a specific electron and tail. Its position relative to other electrons is determined by the index of the electron.
+     * @param {number} index
+     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     */
 
-    drawElectron(index) {
-    //Gets the current rotation and takes the electron's random relative rotation into account.
+    drawElectron(g, index) {
+        //Gets the current rotation and takes the electron's random relative rotation into account.
         let baseRot = this._rotation + this._randoms[index];
         let deltaRot = Math.PI / 256;
         let jiggle = 0;
@@ -501,41 +557,69 @@ class Atom {
         //Loops through
         for (let i = 0; i < this._tailSpheres; i++) {
             let rate = i / this._tailSpheres;
-            push();
-            rotateY(baseRot + deltaRot * i * rate);
-            if (this._electronVibrate) {
-                jiggle = random(-0.5, 0.5);
+            if (g) {
+                g.push();
+                g.rotateY(baseRot + deltaRot * i * rate);
+                if (this._electronVibrate) {
+                    jiggle = random(-0.5, 0.5);
+                }
+                g.translate(this._radius / 2 + jiggle, jiggle);
+                let size = rate * this._nucleusRadius / 2 / 5;
+
+                g.fill(this._electronColor);
+                g.ellipsoid(size * 1.5, size);
+
+                g.pop();
+            } else {
+                push();
+                rotateY(baseRot + deltaRot * i * rate);
+                if (this._electronVibrate) {
+                    jiggle = random(-0.5, 0.5);
+                }
+                translate(this._radius + jiggle, jiggle);
+                let size = rate * this._nucleusRadius / 5;
+
+                fill(this._electronColor);
+                ellipsoid(size * 1.5, size);
+
+                pop();
             }
-            translate(this._radius + jiggle, jiggle);
-            let size = rate * this._nucleusRadius / 5;
 
-            fill(this._electronColor);
-            ellipsoid(size * 1.5, size);
+        }
+    }
 
+    /**
+     * Draws the orbit for each electron onto the canvas.
+     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     * @param {number} thickness - The thickness of the orbit.
+     */
+
+    drawOrbits(g, thickness) {
+        if (g) {
+            g.push();
+            g.rotateX(PI / 2);
+            g.fill(0);
+            for (let i = 0; i < this._electronCount; i++) {
+                g.rotateY(this._deltaAngle);
+                g.torus(this._radius / 2, thickness, 50, 50);
+            }
+            g.pop();
+        } else {
+            push();
+            rotateX(PI / 2);
+            fill(0);
+            for (let i = 0; i < this._electronCount; i++) {
+                rotateY(this._deltaAngle);
+                torus(this._radius, thickness, 50, 50);
+            }
             pop();
         }
     }
 
     /**
-   * Draws the orbit for each electron onto the canvas.
-   * @param {number} thickness - The thickness of the orbit.
-   */
-
-    drawOrbits(thickness) {
-        push();
-        rotateX(PI / 2);
-        fill(0);
-        for (let i = 0; i < this._electronCount; i++) {
-            rotateY(this._deltaAngle);
-            torus(this._radius, thickness, 50, 50);
-        }
-        pop();
-    }
-
-    /**
-   * Increment counterX by amount if spinX is enabled.
-   * @param {number} amount
-   */
+     * Increment counterX by amount if spinX is enabled.
+     * @param {number} amount
+     */
 
     incrementCounterX(amount) {
         if (atom.spinX) {
@@ -544,9 +628,9 @@ class Atom {
     }
 
     /**
-   * Increment counterY by amount if spinY is enabled.
-   * @param {number} amount
-   */
+     * Increment counterY by amount if spinY is enabled.
+     * @param {number} amount
+     */
 
     incrementCounterY(amount) {
         if (atom.spinY) {
@@ -555,9 +639,9 @@ class Atom {
     }
 
     /**
-   * Increment counterZ by amount if spinZ is enabled.
-   * @param {number} amount
-   */
+     * Increment counterZ by amount if spinZ is enabled.
+     * @param {number} amount
+     */
 
     incrementCounterZ(amount) {
         if (atom.spinZ) {
@@ -580,7 +664,6 @@ class Atom {
             } else {
                 this._nucleusColorCounter += this._nucleusColorCycleRate;
             }
-            console.log(this._nucleusColorCycleRate);
             this._nucleusColor = color('hsl(' + Math.floor(this._nucleusColorCounter) + ',' + saturation + '%,' + brightness + '%)');
         }
 
@@ -590,37 +673,67 @@ class Atom {
             } else {
                 this._electronColorCounter += this._electronColorCycleRate;
             }
-            console.log(this._electronColorCycleRate);
             this._electronColor = color('hsl(' + Math.floor(this._electronColorCounter) + ',' + saturation + '%,' + brightness + '%)');
         }
     }
 
     /**
-   * Draws the nucleus, electrons and orbits to the canvas.
-   */
+     * Draws the nucleus, electrons and orbits to the canvas.
+     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     */
 
     draw(g) {
 
         if (g) {
+
+            push();
+
+            this.cycleColors(100, 50);
+
             clear();
-            g.background(255);
-            g.fill(255,32,165);
-            g.cone(50,50);
-            g.rotateX(frameCount/10000);
-            g.rotateY(frameCount/10000);
+            g.background(130);
+
+            if (atom.smoothing) {
+                smooth();
+            } else {
+                noSmooth();
+            }
+
+            g.rotateX(atom.counterX * PI / 128);
+            g.rotateY(atom.counterY * PI / 128);
+            g.rotateZ(atom.counterZ * PI / 128);
+
+            let deltaTime = this.calcDeltaTime();
+            /*
+        A bunch of maths that increments the rotation variable depending on the time since the draw function was last called.
+        This keeps things looking smooth and consistent if the framerate fluctuates.
+         */
+            this._rotation += (deltaTime * 2 * PI * this._rotsPerSec / 1000);
+            g.noStroke();
+
+            this.drawNucleus(g);
+
+            if (this._enableOrbits) {
+                this.drawOrbits(g, 0.75);
+            }
+
+            this.drawElectrons(g);
+
+            //Resets this._old so that calcDeltaTime() can be called again.
+            this._old = this._now;
 
             texture(g);
-            rotateX(frameCount/100);
-            rotateY(frameCount/100);
+            rotateX(frameCount / 100);
+            rotateY(frameCount / 100);
             box(200);
 
+            pop();
 
         } else {
 
             this.cycleColors(100, 50);
 
             clear();
-
             if (atom.smoothing) {
                 smooth();
             } else {
@@ -631,9 +744,6 @@ class Atom {
             rotateY(atom.counterY * PI / 16);
             rotateZ(atom.counterZ * PI / 16);
 
-            this.incrementCounterX(0.3);
-            this.incrementCounterY(0.3);
-            this.incrementCounterZ(0.3);
 
             let deltaTime = this.calcDeltaTime();
             /*
@@ -643,17 +753,21 @@ class Atom {
             this._rotation += (deltaTime * 2 * PI * this._rotsPerSec / 1000);
             noStroke();
 
-            this.drawNucleus();
+            this.drawNucleus(false);
 
             if (this._enableOrbits) {
-                this.drawOrbits(0.75);
+                this.drawOrbits(false, 0.75);
             }
 
-            this.drawElectrons();
+            this.drawElectrons(false);
 
             //Resets this._old so that calcDeltaTime() can be called again.
             this._old = this._now;
         }
+
+        this.incrementCounterX(0.3);
+        this.incrementCounterY(0.3);
+        this.incrementCounterZ(0.3);
     }
 
     /**
@@ -661,8 +775,8 @@ class Atom {
      *
      * Original author: Canopus (https://www.openprocessing.org/user/135028)
      *
-     * Link: https://www.openprocessing.org/sketch/578925
+     * Original sketch: https://www.openprocessing.org/sketch/578925
      *
-     * @license CC BY-SA 3.0
+     * License: CC BY-SA 3.0
      */
 }
