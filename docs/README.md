@@ -2,6 +2,8 @@
 
 # Documentation for Aesthetic Atoms
 
+Note: Both getters and setters appear in this documentation under the same name. Setters have parameters whereas getters do not.
+
 ### Table of Contents
 
 -   [Atom][1]
