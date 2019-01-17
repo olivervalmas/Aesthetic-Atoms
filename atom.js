@@ -1,5 +1,6 @@
-/** @class A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
- * of the model is to be aesthetically pleasing and is therefore not scientifically accurate. */
+/* @class A class that represents an interactive model of an atom complete with a nucleus, electrons and their orbits. The aim
+ * of the model is to be aesthetically pleasing and is therefore not scientifically accurate.
+ */
 
 class Atom {
 
@@ -43,7 +44,7 @@ class Atom {
          * writing the name of the atom at the top of the page.
          */
 
-        this._names = ["Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon"];
+        this._names = ['Hydrogen', 'Helium', 'Lithium', 'Beryllium', 'Boron', 'Carbon', 'Nitrogen', 'Oxygen', 'Fluorine', 'Neon'];
         this._nucleusColor = color(3, 28, 193);
         this._electronColor = color(193, 3, 3);
 
