@@ -4,20 +4,16 @@
 
 <head>
     <title>Aesthetic Atoms</title>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="atom.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.css"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
+    <script src="atom.js" type="text/javascript"></script>
     <style>
 
         h1 {
             text-align: center;
-        }
-
-        body {
-            overflow: hidden;
         }
 
         form {
@@ -38,9 +34,9 @@
 
         <form id="input_form">
             <label for="nucleusRadius">Nucleus Radius</label>
-            <input id="nucleusRadius" type="number" min="5" max="1000" value="20"/>
+            <input id="nucleusRadius" max="200" min="1" type="number" value="20"/>
             <label for="electronCount">Electron Count</label>
-            <input id="electronCount" type="number" min="1" max="10" value="3"/></br>
+            <input id="electronCount" max="10" min="1" type="number" value="3"/></br>
 
             <label for="nucleusVibrate">Nucleus Vibration</label>
             <input id="nucleusVibrate" type="checkbox"/>
@@ -48,7 +44,7 @@
             <input id="electronVibrate" type="checkbox"/></br>
 
             <label for="electronSpeed">Electron Speed</label>
-            <input id="electronSpeed" type="range" min="0" max="5" value="0.75" step="0.01"/>
+            <input id="electronSpeed" max="5" min="0" step="0.01" type="range" value="0.75"/>
             <label for="nucleusColor">Nucleus Color</label>
             <input id="nucleusColor" type="color" value="#031cc1"/>
             <label for="electronColor">Electron Color</label>
@@ -86,7 +82,7 @@
         </ul>
     </div>
 
-    <div style="width: 50%; float:right; padding-left: 5px; padding-right: 50px; padding-top: 20px" id="sketch-holder">
+    <div id="sketch-holder" style="width: 50%; float:right; padding-left: 5px; padding-right: 50px; padding-top: 20px">
     </div>
 </div>
 </body>

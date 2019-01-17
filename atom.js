@@ -160,7 +160,7 @@ class Atom {
      */
 
     set electronCount(newElectronCount) {
-        if (newElectronCount <= this.maximumNumberOfElectrons) {
+        if (1 <= newElectronCount <= this._maximumNumberOfElectrons) {
             this._electronCount = newElectronCount;
             this._deltaAngle = PI / this._electronCount;
         }
@@ -357,7 +357,7 @@ class Atom {
 
     /**
      * Gets the rate at which the nucleus cycles through colors.
-     * @param newVal
+     * @return {number}
      */
 
     get nucleusColorCycleRate() {
@@ -457,7 +457,7 @@ class Atom {
 
     /**
      * Draws the nucleus to the canvas.
-     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     * @param {p5.Renderer} g - Optional renderer object for using sketch as a texture.
      */
 
     drawNucleus(g) {
@@ -525,7 +525,7 @@ class Atom {
 
     /**
      * Draws the specified number of electrons to the canvas.
-     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     * @param {p5.Renderer} g - Optional renderer object for using sketch as a texture.
      */
 
     drawElectrons(g) {
@@ -545,7 +545,7 @@ class Atom {
     /**
      * Draws a specific electron and tail. Its position relative to other electrons is determined by the index of the electron.
      * @param {number} index
-     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     * @param {p5.Renderer} g - Optional renderer object for using sketch as a texture.
      */
 
     drawElectron(g, index) {
@@ -590,7 +590,7 @@ class Atom {
 
     /**
      * Draws the orbit for each electron onto the canvas.
-     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     * @param {p5.Renderer} g - Optional renderer object for using sketch as a texture.
      * @param {number} thickness - The thickness of the orbit.
      */
 
@@ -601,7 +601,7 @@ class Atom {
             g.fill(0);
             for (let i = 0; i < this._electronCount; i++) {
                 g.rotateY(this._deltaAngle);
-                g.torus(this._radius / 2, thickness, 50, 50);
+                g.torus(this._radius / 2, thickness, 24, 16);
             }
             g.pop();
         } else {
@@ -610,7 +610,7 @@ class Atom {
             fill(0);
             for (let i = 0; i < this._electronCount; i++) {
                 rotateY(this._deltaAngle);
-                torus(this._radius, thickness, 50, 50);
+                torus(this._radius, thickness, 24, 16);
             }
             pop();
         }
@@ -679,7 +679,7 @@ class Atom {
 
     /**
      * Draws the nucleus, electrons and orbits to the canvas.
-     * @param {p5.Graphics} g - Optional graphics object for using sketch as a texture.
+     * @param {p5.Renderer} g - Optional renderer object for using sketch as a texture.
      */
 
     draw(g) {

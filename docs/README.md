@@ -386,7 +386,7 @@ Draws the nucleus to the canvas.
 
 #### Parameters
 
--   `g` **p5.Graphics** Optional graphics object for using sketch as a texture.
+-   `g` **p5.Renderer** Optional renderer object for using sketch as a texture.
 
 ### drawElectrons
 
@@ -394,7 +394,7 @@ Draws the specified number of electrons to the canvas.
 
 #### Parameters
 
--   `g` **p5.Graphics** Optional graphics object for using sketch as a texture.
+-   `g` **p5.Renderer** Optional renderer object for using sketch as a texture.
 
 ### drawElectron
 
@@ -402,7 +402,7 @@ Draws a specific electron and tail. Its position relative to other electrons is 
 
 #### Parameters
 
--   `g` **p5.Graphics** Optional graphics object for using sketch as a texture.
+-   `g` **p5.Renderer** Optional renderer object for using sketch as a texture.
 -   `index` **[number][81]** 
 
 ### drawOrbits
@@ -411,7 +411,7 @@ Draws the orbit for each electron onto the canvas.
 
 #### Parameters
 
--   `g` **p5.Graphics** Optional graphics object for using sketch as a texture.
+-   `g` **p5.Renderer** Optional renderer object for using sketch as a texture.
 -   `thickness` **[number][81]** The thickness of the orbit.
 
 ### incrementCounterX
@@ -454,7 +454,7 @@ Draws the nucleus, electrons and orbits to the canvas.
 
 #### Parameters
 
--   `g` **p5.Graphics** Optional graphics object for using sketch as a texture.
+-   `g` **p5.Renderer** Optional renderer object for using sketch as a texture.
 
 ## 
 
